@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { getValues, hasKey, isKey, parseArgs } from "args-json";
+import { getValues, isKey, parseArgs } from "args-json";
 import type { Config } from "./Config.ts";
 import { serve } from "./serve.ts";
 
@@ -19,15 +19,25 @@ async function run() {
   for (let cliKey of ["", "b", "bundle", "dirs"])
     delete cliConfig[cliKey as keyof CLIConfig];
 
-  let bundleArgs = getValues(["--bundle", "-b"]);
   let dirs = getValues("--dirs");
+  let bundleArgs = getValues(["--bundle", "-b"]);
+  let bundleConfig: Config["bundle"];
+
+  if (Array.isArray(bundleArgs)) {
+    if (bundleArgs.length === 1 && bundleArgs[0] === "false")
+      bundleConfig = false;
+    else
+      bundleConfig = {
+        input: bundleArgs[0],
+        dir: bundleArgs[1],
+        output: bundleArgs[2],
+      };
+  }
 
   let config: Config = {
     path,
     dirs,
-    bundle: Array.isArray(bundleArgs)
-      ? { input: bundleArgs[0], dir: bundleArgs[1], output: bundleArgs[2] }
-      : hasKey("--bundle") || hasKey("-b"),
+    bundle: bundleConfig,
     watch: true,
     log: true,
     ...cliConfig,
