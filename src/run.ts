@@ -1,9 +1,13 @@
 #!/usr/bin/env node
-import { getValues, isKey, isOff, parseArgs } from "args-json";
+import { getValues, isExplicitlyOff, isKey, Off, On, parseArgs } from "args-json";
 import type { Config } from "./Config.ts";
 import { serve } from "./serve.ts";
 
-type CLIConfig = Omit<Config, "dirs" | "bundle" | "onRequest">;
+type CLIConfig = Omit<Config, "dirs" | "bundle" | "onRequest" | "spa" | "watch" | "log"> & {
+  spa?: On | Off;
+  watch?: On | Off;
+  log?: On | Off;
+};
 
 async function run() {
   let args = process.argv.slice(2);
@@ -11,20 +15,20 @@ async function run() {
 
   if (args.length !== 0 && !isKey(args[0])) path = args.shift();
 
-  let cliConfig = parseArgs<CLIConfig>(args, {
+  let { spa, watch, log, ...cliConfig } = parseArgs<CLIConfig>(args, {
     u: "url",
     s: "spa",
   });
 
   for (let cliKey of ["", "b", "bundle", "dirs"])
-    delete cliConfig[cliKey as keyof CLIConfig];
+    delete cliConfig[cliKey as keyof typeof cliConfig];
 
   let dirs = getValues("--dirs");
   let bundleArgs = getValues(["--bundle", "-b"]);
   let bundleConfig: Config["bundle"];
 
   if (Array.isArray(bundleArgs)) {
-    if (bundleArgs.length === 1 && isOff(bundleArgs[0])) bundleConfig = false;
+    if (bundleArgs.length === 1 && isExplicitlyOff(bundleArgs[0])) bundleConfig = false;
     else
       bundleConfig = {
         input: bundleArgs[0],
@@ -37,10 +41,10 @@ async function run() {
     path,
     dirs,
     bundle: bundleConfig,
+    spa: !isExplicitlyOff(spa),
+    watch: !isExplicitlyOff(watch),
+    log: !isExplicitlyOff(log),
     ...cliConfig,
-    spa: !isOff(cliConfig.spa),
-    watch: !isOff(cliConfig.watch),
-    log: !isOff(cliConfig.log),
   };
 
   await serve(config);
