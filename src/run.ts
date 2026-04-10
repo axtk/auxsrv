@@ -24,8 +24,7 @@ async function run() {
   let bundleConfig: Config["bundle"];
 
   if (Array.isArray(bundleArgs)) {
-    if (bundleArgs.length === 1 && isOff(bundleArgs[0]))
-      bundleConfig = false;
+    if (bundleArgs.length === 1 && isOff(bundleArgs[0])) bundleConfig = false;
     else
       bundleConfig = {
         input: bundleArgs[0],
