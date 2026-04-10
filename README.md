@@ -10,31 +10,37 @@ Use cases:
 ## CLI
 
 ```
-npx auxsrv <app_dir> [...optional flags]
+npx auxsrv [<app_dir>] [...parameters]
 
-Flag            Usage notes
+Parameter       Usage notes
+───────────────────────────────────────────────────────────────────────
+<app_dir>       # Relative to the current directory.
+                # Default: <current_dir> (equivalent to ".")
 
---bundle, -b    -b [input_file [[output_dir] [output_file]]]
-                Defaults:
-                - input_file: first of "index.ts", "index.tsx", "src/index.ts", "src/index.tsx"
-                  that exists (relative to <app_dir>)
-                - output_dir: "dist"
-                - ouput_file: "index.js" (relative to <app_dir>/<output_dir>)
+--bundle, -b    -b [<input_file> [[<output_dir>] [<output_file>]]]
+                # <input_file>: relative to <app_dir> (default: first
+                #   of "index.ts", "index.tsx", "src/index.ts",
+                #   "src/index.tsx" that exists)
+                # <output_dir>: relative to <app_dir> (default: "dist")
+                # <output_file>: relative to <app_dir>/<output_dir>
+                #   (default: "index.js")
 
 --url, -u       -u [<host>:]<port>
-                Default: "localhost:3000"
+                # Default: "localhost:3000"
 
---spa, -s       Whether to enable the SPA mode by handling all unmatched paths as "/".
-                Enabled by default.
+--spa, -s       # Whether to enable the SPA mode by handling all
+                # unmatched paths as "/". Enabled by default.
 
---dirs          --dirs assets public
-                Lists subdirectories of <app_dir> to serve files from.
-                By default, files are served from <app_dir>.
+--dirs          --dirs <...space-separated dir list>
+                # Lists subdirectories of <app_dir> to serve files
+                # from. By default, files are served from <app_dir>.
+                # Example: --dirs assets public
 
---watch         Whether to rebuild the bundled code if the source code changes.
-                Enabled by default in the CLI mode.
+--watch         # Whether to rebuild the bundled code if the source
+                # code changes. Enabled by default in the CLI mode.
 
---minify        To minify the bundled code.
+--minify        # To minify the bundled code.
+───────────────────────────────────────────────────────────────────────
 ```
 
 <details>
