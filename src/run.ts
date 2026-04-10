@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { getValues, isKey, parseArgs } from "args-json";
+import { getValues, isKey, isOff, parseArgs } from "args-json";
 import type { Config } from "./Config.ts";
 import { serve } from "./serve.ts";
 
@@ -24,7 +24,7 @@ async function run() {
   let bundleConfig: Config["bundle"];
 
   if (Array.isArray(bundleArgs)) {
-    if (bundleArgs.length === 1 && bundleArgs[0] === "false")
+    if (bundleArgs.length === 1 && isOff(bundleArgs[0]))
       bundleConfig = false;
     else
       bundleConfig = {
@@ -38,9 +38,10 @@ async function run() {
     path,
     dirs,
     bundle: bundleConfig,
-    watch: true,
-    log: true,
     ...cliConfig,
+    spa: !isOff(cliConfig.spa),
+    watch: !isOff(cliConfig.watch),
+    log: !isOff(cliConfig.log),
   };
 
   await serve(config);
