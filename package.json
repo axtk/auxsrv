@@ -1,6 +1,6 @@
 {
   "name": "auxsrv",
-  "version": "0.3.14",
+  "version": "0.3.15",
   "description": "Simple static file server + bundler, primarily for demo apps and tests, manual or automated",
   "keywords": [
     "node",
