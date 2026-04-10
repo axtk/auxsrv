@@ -9,7 +9,7 @@ async function run() {
   let args = process.argv.slice(2);
   let path: string | undefined;
 
-  if (!isKey(args[0])) path = args.shift();
+  if (args.length !== 0 && !isKey(args[0])) path = args.shift();
 
   let cliConfig = parseArgs<CLIConfig>(args, {
     u: "url",
