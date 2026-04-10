@@ -30,7 +30,7 @@ Parameter       Usage notes
 
 --spa, -s       # Whether to enable the SPA mode by handling all
                 # unmatched paths as "/". Enabled by default.
-                # Use "--spa=false" to turn it off.
+                # Use "--spa=off" to turn it off.
 
 --dirs          --dirs <...space-separated dir list>
                 # Lists subdirectories of <app_dir> to serve files
@@ -39,7 +39,7 @@ Parameter       Usage notes
 
 --watch         # Whether to rebuild the bundled code if the source
                 # code changes. Enabled by default in the CLI mode.
-                # Use "--watch=false" to turn it off.
+                # Use "--watch=off" to turn it off.
 
 --minify        # To minify the bundled code.
 ───────────────────────────────────────────────────────────────────────
