@@ -1,9 +1,19 @@
 #!/usr/bin/env node
-import { getValues, isExplicitlyOff, isKey, Off, On, parseArgs } from "args-json";
+import {
+  getValues,
+  isExplicitlyOff,
+  isKey,
+  type Off,
+  type On,
+  parseArgs,
+} from "args-json";
 import type { Config } from "./Config.ts";
 import { serve } from "./serve.ts";
 
-type CLIConfig = Omit<Config, "dirs" | "bundle" | "onRequest" | "spa" | "watch" | "log"> & {
+type CLIConfig = Omit<
+  Config,
+  "dirs" | "bundle" | "onRequest" | "spa" | "watch" | "log"
+> & {
   spa?: On | Off;
   watch?: On | Off;
   log?: On | Off;
@@ -28,7 +38,8 @@ async function run() {
   let bundleConfig: Config["bundle"];
 
   if (Array.isArray(bundleArgs)) {
-    if (bundleArgs.length === 1 && isExplicitlyOff(bundleArgs[0])) bundleConfig = false;
+    if (bundleArgs.length === 1 && isExplicitlyOff(bundleArgs[0]))
+      bundleConfig = false;
     else
       bundleConfig = {
         input: bundleArgs[0],
