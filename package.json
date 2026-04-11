@@ -24,7 +24,8 @@
   "scripts": {
     "compile-bin": "npx esbuild src/run.ts --bundle --outfile=dist/run.mjs --platform=node --format=esm --external:esbuild",
     "preversion": "npx npm-run-all shape compile-bin",
-    "shape": "npx codeshape"
+    "shape": "npx codeshape",
+    "typecheck": "npx codeshape typecheck"
   },
   "devDependencies": {
     "@types/node": "^25.6.0"
