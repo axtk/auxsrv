@@ -27,10 +27,10 @@
     "shape": "npx codeshape"
   },
   "devDependencies": {
-    "@types/node": "^25.5.0"
+    "@types/node": "^25.6.0"
   },
   "dependencies": {
-    "args-json": "^1.4.1",
+    "args-json": "^1.4.2",
     "esbuild": "^0.28.0"
   }
 }
