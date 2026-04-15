@@ -31,7 +31,7 @@
     "@types/node": "^25.6.0"
   },
   "dependencies": {
-    "args-json": "^1.4.2",
+    "args-json": "^1.4.3",
     "esbuild": "^0.28.0"
   }
 }
