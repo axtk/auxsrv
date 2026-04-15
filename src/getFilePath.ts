@@ -25,10 +25,17 @@ export async function getFilePath(url = "", config: Config) {
     if (!urlPath.endsWith("/") && (await isValidFilePath(filePath, dirPath)))
       return filePath;
 
-    filePath = join(dirPath, spa ? "" : urlPath, "index.html");
+    filePath = join(dirPath, urlPath, "index.html");
 
     if (await isValidFilePath(filePath, dirPath)) return filePath;
-    else if (debug) {
+
+    if (spa) {
+      filePath = join(dirPath, "index.html");
+
+      if (await isValidFilePath(filePath, dirPath)) return filePath;
+    }
+
+    if (debug) {
       console.log(`Dir path: ${JSON.stringify(dirPath)}`);
       console.log(`Invalid file path: ${JSON.stringify(filePath)}`);
     }
