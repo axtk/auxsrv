@@ -41,7 +41,7 @@ export async function serve(config: Config = {}): Promise<Server> {
           `\n${req.method} ${req.url}\nFile: ${JSON.stringify(filePath)}`,
         );
 
-      if (filePath === undefined) {
+      if (filePath === null) {
         res.writeHead(404, { "content-type": "text/plain" });
         res.end("Not found");
         return;

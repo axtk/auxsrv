@@ -3,6 +3,10 @@ import type { Config } from "./Config.ts";
 import { getRootPath } from "./getRootPath.ts";
 import { isValidFilePath } from "./isValidFilePath.ts";
 
+/**
+ * Resolves with a file path, or `null` if `url` doesn't point to
+ * a valid file path.
+ */
 export async function getFilePath(url = "", config: Config) {
   let { debug, dirs = [], spa = true } = config;
 
@@ -29,4 +33,6 @@ export async function getFilePath(url = "", config: Config) {
       console.log(`Invalid file path: ${JSON.stringify(filePath)}`);
     }
   }
+
+  return null;
 }
