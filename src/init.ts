@@ -12,7 +12,7 @@ const possibleInputFiles = [
   "src/index.tsx",
 ];
 
-export async function bundle(config: Config = {}) {
+export async function init(config: Config = {}) {
   if (config.bundle === false) return;
 
   let { bundle: options, init, minify, watch } = config;

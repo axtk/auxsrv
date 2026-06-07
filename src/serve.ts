@@ -1,7 +1,7 @@
 import { createReadStream } from "node:fs";
 import { createServer } from "node:http";
 import { extname } from "node:path";
-import { bundle } from "./bundle.ts";
+import { init } from "./init.ts";
 import type { Config } from "./Config.ts";
 import { getFilePath } from "./getFilePath.ts";
 import { getTarget } from "./getTarget.ts";
@@ -17,8 +17,8 @@ export type Server = ReturnType<typeof createServer>;
  * `config.bundle` to do so.
  */
 export async function serve(config: Config = {}): Promise<Server> {
-  let { debug, init, log } = config;
-  let stop = init === false ? undefined : await bundle(config);
+  let { debug, log } = config;
+  let stop = config.init === false ? undefined : await init(config);
 
   return new Promise<Server>((resolve) => {
     let server = createServer(async (req, res) => {
