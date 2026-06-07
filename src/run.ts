@@ -8,8 +8,8 @@ import {
   parseArgs,
 } from "args-json";
 import type { Config } from "./Config.ts";
-import { serve } from "./serve.ts";
 import { init } from "./init.ts";
+import { serve } from "./serve.ts";
 
 type CLIConfig = Omit<
   Config,
