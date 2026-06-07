@@ -17,6 +17,9 @@ export type Server = ReturnType<typeof createServer>;
  * `config.bundle` to do so.
  */
 export async function serve(config: Config = {}): Promise<Server> {
+  if (config.init)
+    throw new Error("'serve(config)' doesn't accept 'config.init' set to 'true'. Import 'init' instead of 'serve' to run the initialization without starting the server.");
+
   let { debug, log } = config;
   let stop = config.init === false ? undefined : await init(config);
 
