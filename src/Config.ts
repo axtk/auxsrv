@@ -49,6 +49,11 @@ export type Config = {
    * If `string`, it's equivalent to `input` in `{ input, ouput: "index.js" }`.
    */
   bundle?: boolean | string | BundleConfig | undefined;
+  /**
+   * Whether to run the initialization (i.e. bundling if it's present) without
+   * starting the server and without enabling the watch mode.
+   */
+  init?: boolean;
   /** Custom request handler. */
   onRequest?: (
     req?: IncomingMessage,

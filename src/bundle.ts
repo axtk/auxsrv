@@ -15,7 +15,7 @@ const possibleInputFiles = [
 export async function bundle(config: Config = {}) {
   if (config.bundle === false) return;
 
-  let { bundle: options, watch, minify } = config;
+  let { bundle: options, init, minify, watch } = config;
 
   let normalizedOptions: BundleConfig = {};
   let rootPath = getRootPath(config);
@@ -58,7 +58,7 @@ export async function bundle(config: Config = {}) {
     buildOptions.splitting = true;
   }
 
-  if (watch) {
+  if (watch && !init) {
     let ctx = await context(buildOptions);
 
     await ctx.watch();

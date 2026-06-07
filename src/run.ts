@@ -9,6 +9,7 @@ import {
 } from "args-json";
 import type { Config } from "./Config.ts";
 import { serve } from "./serve.ts";
+import { bundle } from "./bundle.ts";
 
 type CLIConfig = Omit<
   Config,
@@ -57,6 +58,13 @@ async function run() {
     log: !isExplicitlyOff(log),
     ...cliConfig,
   };
+
+  if (config.debug) console.log(JSON.stringify(config, null, 2));
+
+  if (config.init) {
+    await bundle(config);
+    return;
+  }
 
   await serve(config);
 }

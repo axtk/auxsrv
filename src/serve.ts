@@ -17,11 +17,8 @@ export type Server = ReturnType<typeof createServer>;
  * `config.bundle` to do so.
  */
 export async function serve(config: Config = {}): Promise<Server> {
-  let { debug, log } = config;
-
-  if (debug) console.log(JSON.stringify(config, null, 2));
-
-  let stop = await bundle(config);
+  let { debug, init, log } = config;
+  let stop = init === false ? undefined : await bundle(config);
 
   return new Promise<Server>((resolve) => {
     let server = createServer(async (req, res) => {
