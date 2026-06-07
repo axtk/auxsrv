@@ -42,6 +42,10 @@ Parameter       Usage notes
                 # Use "--watch=off" to turn it off.
 
 --minify        # To minify the bundled code.
+
+--init          # Whether to run the initialization (i.e. bundling if
+                # it's present) without starting the server and without
+                # enabling the watch mode.
 ───────────────────────────────────────────────────────────────────────
 ```
 
