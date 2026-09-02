@@ -74,12 +74,12 @@ Parameter       Usage notes
 ```
 // package.json
 "scripts": {
-  "play": "npx auxsrv playground"
+  "demo": "npx auxsrv demo"
 }
 ```
 
 ```
-/playground
+/demo
   - index.css
   - index.html
       contains <script src="/dist/index.js" type="module"></script>
@@ -88,7 +88,7 @@ Parameter       Usage notes
 ```
 
 ```sh
-npm run play
+npm run demo
 ```
 
 ```
@@ -98,7 +98,7 @@ use: {
   baseURL: "http://localhost:3000",
 },
 webServer: {
-  command: "npm run play",
+  command: "npm run demo",
   url: "http://localhost:3000",
 },
 ```
@@ -111,12 +111,12 @@ webServer: {
 ```
 // package.json
 "scripts": {
-  "play": "npx auxsrv playground"
+  "demo": "npx auxsrv demo"
 }
 ```
 
 ```
-/playground
+/demo
   - src
     - App.tsx
     - index.css
@@ -127,7 +127,7 @@ webServer: {
 ```
 
 ```sh
-npm run play
+npm run demo
 ```
 
 ```
@@ -137,7 +137,7 @@ use: {
   baseURL: "http://localhost:3000",
 },
 webServer: {
-  command: "npm run play",
+  command: "npm run demo",
   url: "http://localhost:3000",
 },
 ```
@@ -166,7 +166,7 @@ server.close();
 <summary>Example with Playwright 1 (flat)</summary>
 
 ```
-/playground
+/demo
   - index.css
   - index.html
       contains <script src="/dist/index.js" type="module"></script>
@@ -183,7 +183,7 @@ let server: Server;
 
 test.beforeAll(async () => {
   server = await serve({
-    path: import.meta.url, // or "playground"
+    path: import.meta.url, // or "demo"
   });
 });
 
