@@ -28,10 +28,10 @@
     "typecheck": "npx codeshape typecheck"
   },
   "devDependencies": {
-    "@types/node": "^26.1.1"
+    "@types/node": "^26.4.1"
   },
   "dependencies": {
     "args-json": "^1.4.3",
-    "esbuild": "^0.28.1"
+    "esbuild": "^0.28.2"
   }
 }
