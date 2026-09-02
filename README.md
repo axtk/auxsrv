@@ -9,6 +9,25 @@ Use cases:
 
 ## CLI
 
+Run `npx auxsrv` from the app directory to start a server. By default, the server expects the following files in the app directory:
+
+```
+- index.html
+    # contains <script src="/dist/index.js" type="module"></script>
+- index.ts(x) # can import code from other locations
+```
+
+or
+
+```
+/src
+  - index.ts(x)
+- index.html
+    # contains <script src="/dist/index.js" type="module"></script>
+```
+
+### Options
+
 ```
 npx auxsrv [<app_dir>] [...parameters]
 
