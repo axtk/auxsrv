@@ -18,4 +18,8 @@ export type BundleConfig = {
    * @default "index.js"
    */
   output?: string | undefined;
+  /**
+   * Packages excluded from the bundle.
+   */
+  external?: string[];
 };

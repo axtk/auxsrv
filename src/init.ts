@@ -44,6 +44,7 @@ export async function init(config: Config = {}) {
 
   let buildOptions: BuildOptions = {
     entryPoints: [inputFile],
+    external: normalizedOptions.external,
     bundle: true,
     format: "esm",
     platform: "browser",

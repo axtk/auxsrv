@@ -10,11 +10,12 @@ import {
 import type { Config } from "./Config.ts";
 import { init } from "./init.ts";
 import { serve } from "./serve.ts";
+import { BundleConfig } from "./BundleConfig.ts";
 
 type CLIConfig = Omit<
   Config,
   "dirs" | "bundle" | "onRequest" | "spa" | "watch" | "log"
-> & {
+> & Pick<BundleConfig, "external"> & {
   spa?: On | Off;
   watch?: On | Off;
   log?: On | Off;
@@ -26,7 +27,7 @@ async function run() {
 
   if (args.length !== 0 && !isKey(args[0])) path = args.shift();
 
-  let { spa, watch, log, ...cliConfig } = parseArgs<CLIConfig>(args, {
+  let { spa, watch, log, external, ...cliConfig } = parseArgs<CLIConfig>(args, {
     u: "url",
     s: "spa",
   });
@@ -47,6 +48,12 @@ async function run() {
         dir: bundleArgs[1],
         output: bundleArgs[2],
       };
+  }
+
+  if (bundleConfig !== false && external?.length) {
+    if (typeof bundleConfig === "string") bundleConfig = { input: bundleConfig };
+    else if (typeof bundleConfig !== "object") bundleConfig = {};
+    bundleConfig.external = external;
   }
 
   let config: Config = {
