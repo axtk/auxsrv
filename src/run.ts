@@ -7,19 +7,20 @@ import {
   type On,
   parseArgs,
 } from "args-json";
+import type { BundleConfig } from "./BundleConfig.ts";
 import type { Config } from "./Config.ts";
 import { init } from "./init.ts";
 import { serve } from "./serve.ts";
-import { BundleConfig } from "./BundleConfig.ts";
 
 type CLIConfig = Omit<
   Config,
   "dirs" | "bundle" | "onRequest" | "spa" | "watch" | "log"
-> & Pick<BundleConfig, "external"> & {
-  spa?: On | Off;
-  watch?: On | Off;
-  log?: On | Off;
-};
+> &
+  Pick<BundleConfig, "external"> & {
+    spa?: On | Off;
+    watch?: On | Off;
+    log?: On | Off;
+  };
 
 async function run() {
   let args = process.argv.slice(2);
@@ -51,7 +52,8 @@ async function run() {
   }
 
   if (bundleConfig !== false && external?.length) {
-    if (typeof bundleConfig === "string") bundleConfig = { input: bundleConfig };
+    if (typeof bundleConfig === "string")
+      bundleConfig = { input: bundleConfig };
     else if (typeof bundleConfig !== "object") bundleConfig = {};
     bundleConfig.external = external;
   }
