@@ -11,7 +11,7 @@ export async function getFilePath(url = "", config: Config) {
   let { debug, dirs = [], spa = true } = config;
 
   let rootPath = getRootPath(config);
-  let urlPath = url.replace(/[?#].*$/, "");
+  let urlPath = decodeURIComponent(url.replace(/[?#].*$/, ""));
 
   if (debug) {
     console.log(`Root path: ${JSON.stringify(rootPath)}`);
