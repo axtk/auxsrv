@@ -24,7 +24,10 @@ export async function getFilePath(url = "", config: Config) {
 
     if (!urlPath.endsWith("/")) {
       if (await isValidFilePath(filePath, dirPath)) return filePath;
-      if (!filePath.endsWith(".html") && (await isValidFilePath(`${filePath}.html`, dirPath)))
+      if (
+        !filePath.endsWith(".html") &&
+        (await isValidFilePath(`${filePath}.html`, dirPath))
+      )
         return `${filePath}.html`;
     }
 
