@@ -22,8 +22,11 @@ export async function getFilePath(url = "", config: Config) {
     let dirPath = join(rootPath, dir);
     let filePath = join(dirPath, urlPath);
 
-    if (!urlPath.endsWith("/") && (await isValidFilePath(filePath, dirPath)))
-      return filePath;
+    if (!urlPath.endsWith("/")) {
+      if (await isValidFilePath(filePath, dirPath)) return filePath;
+      if (!filePath.endsWith(".html") && (await isValidFilePath(`${filePath}.html`, dirPath)))
+        return `${filePath}.html`;
+    }
 
     filePath = join(dirPath, urlPath, "index.html");
 
