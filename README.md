@@ -9,7 +9,7 @@ Use cases:
 
 ## CLI
 
-Run `npx auxsrv` from the app directory to start a server. By default, the server expects the following files in the app directory:
+Run `npx auxsrv` from an app directory to start a server. By default, the server expects the following files in the app directory:
 
 ```
 - index.html
@@ -43,6 +43,7 @@ Parameter       Usage notes
                 # <output_dir>: relative to <app_dir> (default: "dist")
                 # <output_file>: relative to <app_dir>/<output_dir>
                 #   (default: "index.js")
+                # Use "--bundle=off" to turn off automatic bundling.
 
 --url, -u       -u [<host>:]<port>
                 # Default: "localhost:3000"
